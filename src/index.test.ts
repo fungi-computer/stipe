@@ -1,0 +1,238 @@
+import { expect, expectTypeOf, test } from "vitest";
+
+import * as indexModule from "./index.js";
+import { STIPE_TOKEN_NAMES } from "./index.js";
+import type {
+  PierreTreesStyleOptions,
+  TerminalPalette,
+  ThemeListener,
+} from "./index.js";
+
+test("Stipe exports only its bounded visual law", () => {
+  expect(Object.keys(indexModule).sort()).toEqual(
+    [
+      "EMBED_THEME_TOKENS",
+      "STIPE_GOOEY_FILTER",
+      "STIPE_SPACING_NAMES",
+      "STIPE_TOKEN_NAMES",
+      "STIPE_THEMES",
+      "applyTheme",
+      "embedThemeProperties",
+      "getTheme",
+      "pierreTreesStyle",
+      "readableContentColor",
+      "subscribeTheme",
+      "stipeThemeSchema",
+      "terminalPalette",
+    ].sort(),
+  );
+
+  expect(STIPE_TOKEN_NAMES).toEqual([
+    "--stipe-font-synthesis",
+    "--stipe-surface-frame-width",
+    "--stipe-surface-frame-image",
+    "--stipe-surface-molding-contrast",
+    "--stipe-shadow-raised",
+    "--stipe-shadow-inset",
+    "--stipe-shadow-edge",
+    "--stipe-display-gasket-face",
+    "--stipe-display-texture-image",
+    "--stipe-display-text-shadow",
+    "--stipe-canvas",
+    "--stipe-surface",
+    "--stipe-surface-raised",
+    "--stipe-surface-selected",
+    "--stipe-fg-muted",
+    "--stipe-linework",
+    "--stipe-hairline",
+    "--stipe-figure-ink",
+    "--stipe-density-compact",
+    "--stipe-density-comfortable",
+    "--stipe-motion-spring",
+    "--stipe-motion-squish",
+    "--stipe-motion-fast",
+    "--stipe-motion-normal",
+    "--stipe-motion-slow",
+    "--stipe-motion-ease",
+    "--stipe-motion-ease-exit",
+    "--stipe-motion-bounce",
+    "--stipe-motion-spring-duration",
+    "--stipe-motion-stretch",
+    "--stipe-motion-distance",
+    "--stipe-motion-stagger",
+    "--stipe-motion-blur",
+    "--stipe-motion-shake",
+    "--stipe-motion-steps",
+    "--stipe-motion-fuse",
+    "--stipe-press-depth",
+    "--stipe-press-scale",
+
+    "--stipe-layer-desktop",
+    "--stipe-layer-windows",
+    "--stipe-layer-chrome",
+    "--stipe-layer-popover",
+    "--stipe-layer-dialog",
+    "--stipe-layer-toast",
+    "--stipe-layer-tooltip",
+    "--stipe-overlay-shadow-outset",
+    "--stipe-icon-size-sm",
+    "--stipe-icon-size-md",
+    "--stipe-icon-size-lg",
+    "--stipe-icon-stroke",
+    "--stipe-card-rim",
+    "--stipe-card-rim-edge",
+    "--stipe-card-face",
+    "--stipe-card-panel",
+    "--stipe-card-ink",
+    "--stipe-card-ink-muted",
+    "--stipe-card-accent",
+    "--stipe-card-shadow",
+    "--stipe-card-foil-highlight",
+    "--stipe-card-foil-warm",
+    "--stipe-card-foil-cool",
+    "--stipe-avatar-shadow",
+    "--stipe-art-coral",
+    "--stipe-art-blue",
+    "--stipe-art-mint",
+    "--stipe-art-grape",
+    "--stipe-art-yellow",
+    "--stipe-art-cream",
+    "--stipe-art-ink",
+    "--stipe-art-inkcap",
+    "--stipe-art-graphite",
+    "--stipe-sketch-ink",
+  ]);
+  expect(Object.isFrozen(STIPE_TOKEN_NAMES)).toBe(true);
+  expectTypeOf(STIPE_TOKEN_NAMES).toEqualTypeOf<
+    readonly [
+      "--stipe-font-synthesis",
+      "--stipe-surface-frame-width",
+      "--stipe-surface-frame-image",
+      "--stipe-surface-molding-contrast",
+      "--stipe-shadow-raised",
+      "--stipe-shadow-inset",
+      "--stipe-shadow-edge",
+      "--stipe-display-gasket-face",
+      "--stipe-display-texture-image",
+      "--stipe-display-text-shadow",
+      "--stipe-canvas",
+      "--stipe-surface",
+      "--stipe-surface-raised",
+      "--stipe-surface-selected",
+      "--stipe-fg-muted",
+      "--stipe-linework",
+      "--stipe-hairline",
+      "--stipe-figure-ink",
+      "--stipe-density-compact",
+      "--stipe-density-comfortable",
+      "--stipe-motion-spring",
+      "--stipe-motion-squish",
+      "--stipe-motion-fast",
+      "--stipe-motion-normal",
+      "--stipe-motion-slow",
+      "--stipe-motion-ease",
+      "--stipe-motion-ease-exit",
+      "--stipe-motion-bounce",
+      "--stipe-motion-spring-duration",
+      "--stipe-motion-stretch",
+      "--stipe-motion-distance",
+      "--stipe-motion-stagger",
+      "--stipe-motion-blur",
+      "--stipe-motion-shake",
+      "--stipe-motion-steps",
+      "--stipe-motion-fuse",
+      "--stipe-press-depth",
+      "--stipe-press-scale",
+
+      "--stipe-layer-desktop",
+      "--stipe-layer-windows",
+      "--stipe-layer-chrome",
+      "--stipe-layer-popover",
+      "--stipe-layer-dialog",
+      "--stipe-layer-toast",
+      "--stipe-layer-tooltip",
+      "--stipe-overlay-shadow-outset",
+      "--stipe-icon-size-sm",
+      "--stipe-icon-size-md",
+      "--stipe-icon-size-lg",
+      "--stipe-icon-stroke",
+      "--stipe-card-rim",
+      "--stipe-card-rim-edge",
+      "--stipe-card-face",
+      "--stipe-card-panel",
+      "--stipe-card-ink",
+      "--stipe-card-ink-muted",
+      "--stipe-card-accent",
+      "--stipe-card-shadow",
+      "--stipe-card-foil-highlight",
+      "--stipe-card-foil-warm",
+      "--stipe-card-foil-cool",
+      "--stipe-avatar-shadow",
+      "--stipe-art-coral",
+      "--stipe-art-blue",
+      "--stipe-art-mint",
+      "--stipe-art-grape",
+      "--stipe-art-yellow",
+      "--stipe-art-cream",
+      "--stipe-art-ink",
+      "--stipe-art-inkcap",
+      "--stipe-art-graphite",
+      "--stipe-sketch-ink",
+    ]
+  >();
+
+  expectTypeOf<ThemeListener>().toEqualTypeOf<(theme: string) => void>();
+  expectTypeOf<PierreTreesStyleOptions>().toEqualTypeOf<{
+    itemHeight?: number;
+    compact?: boolean;
+  }>();
+  expectTypeOf<TerminalPalette>().toEqualTypeOf<
+    Readonly<{
+      background: string;
+      foreground: string;
+      cursor: string;
+      cursorAccent: string;
+      selectionBackground: string;
+      surface: string;
+      primary: string;
+      accent: string;
+      success: string;
+      info: string;
+      warning: string;
+      error: string;
+      black: string;
+      red: string;
+      green: string;
+      yellow: string;
+      blue: string;
+      magenta: string;
+      cyan: string;
+      white: string;
+      brightBlack: string;
+      brightRed: string;
+      brightGreen: string;
+      brightYellow: string;
+      brightBlue: string;
+      brightMagenta: string;
+      brightCyan: string;
+      brightWhite: string;
+      selectionForeground: string;
+    }>
+  >();
+});
+
+test("Stipe keeps unsupported React, product, and policy exports explicitly absent", () => {
+  for (const property of [
+    "ThemeProvider",
+    "useTheme",
+    "Button",
+    "Dashboard",
+    "route",
+    "state",
+    "command",
+    "copy",
+    "policy",
+  ]) {
+    expect(indexModule).not.toHaveProperty(property);
+  }
+});

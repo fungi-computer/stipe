@@ -1,0 +1,121 @@
+{
+  "expectedTarballFiles": [
+    "package/LICENSE",
+    "package/README.md",
+    "package/dist/embed.d.ts",
+    "package/dist/embed.js",
+    "package/dist/gooey.d.ts",
+    "package/dist/gooey.js",
+    "package/dist/index.d.ts",
+    "package/dist/index.js",
+    "package/dist/pierre/trees.d.ts",
+    "package/dist/pierre/trees.js",
+    "package/dist/styles.css",
+    "package/dist/terminal.d.ts",
+    "package/dist/terminal.js",
+    "package/dist/theme.d.ts",
+    "package/dist/theme.js",
+    "package/docs/api/README.md",
+    "package/docs/api/index.md",
+    "package/docs/api/pierre/trees.md",
+    "package/docs/api/theme.md",
+    "package/fonts-display.css",
+    "package/fonts-mono.css",
+    "package/fonts-sans.css",
+    "package/fonts.css",
+    "package/fonts/Anton-5.3.0-latin.woff2",
+    "package/fonts/Anton-OFL.txt",
+    "package/fonts/BricolageGrotesque-OFL.txt",
+    "package/fonts/BricolageGrotesque-VF-latin.woff2",
+    "package/fonts/DepartureMono-OFL.txt",
+    "package/fonts/DepartureMono-Regular.woff2",
+    "package/fonts/Fraunces-Italic-VF-latin.woff2",
+    "package/fonts/Fraunces-OFL.txt",
+    "package/fonts/Fraunces-VF-latin.woff2",
+    "package/fonts/GrenzeGotisch-OFL.txt",
+    "package/fonts/GrenzeGotisch-VF-latin.woff2",
+    "package/fonts/InstrumentSans-Italic-VF-latin.woff2",
+    "package/fonts/InstrumentSans-OFL.txt",
+    "package/fonts/InstrumentSans-VF-latin.woff2",
+    "package/fonts/MapleMono-OFL.txt",
+    "package/fonts/MapleMono-VF.woff2",
+    "package/fonts/NothingYouCouldDo-OFL.txt",
+    "package/fonts/NothingYouCouldDo-Regular.woff2",
+    "package/fonts/Nunito-OFL.txt",
+    "package/fonts/Nunito-VF-8c6a9bb-cyrillic-ext.woff2",
+    "package/fonts/Nunito-VF-8c6a9bb-cyrillic.woff2",
+    "package/fonts/Nunito-VF-8c6a9bb-latin-ext.woff2",
+    "package/fonts/Nunito-VF-8c6a9bb-latin.woff2",
+    "package/fonts/Nunito-VF-8c6a9bb-vietnamese.woff2",
+    "package/fonts/README.md",
+    "package/package.json",
+    "package/pierre/trees.css",
+    "package/styles.css"
+  ],
+  "runtimeFixture": "test/stranger/runtime.mjs",
+  "typecheckFixture": "test/stranger/consumer.mts",
+  "docs": {
+    "sigil": "read",
+    "home": {
+      "lead": "One stylesheet for Tailwind CSS and daisyUI with maintained light and dark themes, a spacing scale, self-hosted fonts and material tokens.",
+      "example": {
+        "file": "home.ts",
+        "title": "Read a theme's terminal colors",
+        "caption": "terminalPalette returns latte's ANSI colors for a terminal emulator such as xterm.js; runs with no browser or bundler."
+      },
+      "ladder": {
+        "start": [
+          {
+            "title": "Quickstart",
+            "href": "/quickstart/",
+            "description": "Load the stylesheet once and set a theme."
+          },
+          {
+            "title": "Core concepts",
+            "href": "/concepts/#core-concepts",
+            "description": "Themes, spacing, fonts and material tokens in one place."
+          }
+        ],
+        "tasks": [
+          {
+            "title": "Theme a whole page",
+            "href": "/api/theme/",
+            "description": "applyTheme, getTheme and subscribeTheme set and watch data-theme."
+          },
+          {
+            "title": "Use the named spacing scale",
+            "href": "/concepts/#named-spacing",
+            "description": "Classes such as px-xs, py-sm and gap-md, and their rem values."
+          },
+          {
+            "title": "Feed a terminal emulator your theme",
+            "href": "/api/entry/",
+            "description": "terminalPalette's frozen ANSI and semantic colors for latte and mocha."
+          },
+          {
+            "title": "Theme an embedded widget",
+            "href": "/concepts/#embed-themes",
+            "description": "embedThemeProperties sets daisyUI colors from an owner's accent."
+          }
+        ],
+        "reference": [
+          {
+            "title": "API reference",
+            "href": "/api/",
+            "description": "Every typed export: theme helpers, terminalPalette, embed and Pierre tree styling."
+          },
+          {
+            "title": "Install",
+            "href": "/install/",
+            "description": "Entrypoints, the Tailwind and daisyUI dependency and the Node requirement."
+          },
+          {
+            "title": "Status and limits",
+            "href": "/status/",
+            "description": "Stability, thrown errors and license."
+          }
+        ]
+      }
+    }
+  }
+}

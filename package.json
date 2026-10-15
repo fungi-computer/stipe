@@ -1,0 +1,92 @@
+{
+  "name": "@fungi.computer/stipe",
+  "version": "0.0.1",
+  "author": "Levi <levi@technomancy.dev>",
+  "description": "CSS-first visual-law package for Fungi",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js"
+    },
+    "./pierre/trees": {
+      "types": "./dist/pierre/trees.d.ts",
+      "import": "./dist/pierre/trees.js"
+    },
+    "./styles.css": "./styles.css",
+    "./pierre/trees.css": "./pierre/trees.css",
+    "./fonts.css": "./fonts.css",
+    "./fonts-sans.css": "./fonts-sans.css",
+    "./fonts-mono.css": "./fonts-mono.css",
+    "./fonts-display.css": "./fonts-display.css"
+  },
+  "files": [
+    "dist",
+    "styles.css",
+    "fonts/*.woff2",
+    "fonts/*.txt",
+    "fonts/README.md",
+    "fonts-sans.css",
+    "fonts-mono.css",
+    "fonts-display.css",
+    "pierre/trees.css",
+    "docs/api",
+    "README.md",
+    "LICENSE",
+    "fonts.css"
+  ],
+  "scripts": {
+    "lint": "eslint src test --max-warnings=0 && ../../node_modules/.bin/oxlint --config ../../oxlint.config.ts --deny-warnings src test",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "pnpm run clean && tsc -p tsconfig.build.json && pnpm run build:css",
+    "build:css": "mkdir -p dist && tailwindcss -i ./styles.css -o ./dist/styles.css",
+    "clean": "node --input-type=module --eval \"import { rm } from 'node:fs/promises'; await rm('dist', { recursive: true, force: true });\"",
+    "test": "vitest run",
+    "docs": "tsx ../../tooling/repository/src/docs/cli.ts check --root ../..",
+    "docs:write": "tsx ../../tooling/repository/src/docs/cli.ts write --root ../..",
+    "pack": "mkdir -p ../../.botanical/stipe-pack && pnpm pack --pack-destination ../../.botanical/stipe-pack",
+    "smoke": "node --input-type=module -e \"import('./dist/index.js').then(({ applyTheme }) => { if (typeof applyTheme !== 'function') process.exit(1); })\"",
+    "stranger": "tsx ../../tooling/repository/src/artifacts/cli.ts --repo-root ../.. .",
+    "format:check": "node ../../tooling/repository/scripts/format-package-check.mjs",
+    "lint:anti-slop": "node ../../tooling/repository/scripts/lint-package-anti-slop.mjs"
+  },
+  "botanical": {
+    "role": "package",
+    "operations": {
+      "lint": "required",
+      "typecheck": "required",
+      "build": "required",
+      "test": "required",
+      "docs": "required",
+      "pack": "required",
+      "smoke": "required",
+      "stranger": "required"
+    }
+  },
+  "dependencies": {
+    "daisyui": "5.7.19",
+    "tailwindcss": "4.2.1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.2.1",
+    "@types/node": "24.13.3",
+    "postcss": "8.5.26",
+    "typescript": "5.9.3",
+    "vitest": "4.1.11"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fungi-computer/stipe.git"
+  }
+}

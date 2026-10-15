@@ -1,0 +1,1399 @@
+@import "tailwindcss";
+
+/* SVG lighting and alpha masks consume these without color utility classes. */
+@theme static {
+  --color-black: #000;
+  --color-white: #fff;
+}
+
+@theme {
+  --font-sans: "Nunito", system-ui, sans-serif;
+  --font-mono: "Maple Mono", ui-monospace, monospace;
+  --font-numeric: var(--font-mono);
+  --font-handwritten: "Nothing You Could Do", cursive;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-nameplate: "Grenze Gotisch", "Fraunces", Georgia, serif;
+  /* Condensed poster display face for bold marketing pages (fungi.computer). */
+  --font-poster:
+    "Anton", "Arial Narrow", "Helvetica Neue Condensed", "Roboto Condensed",
+    Impact, sans-serif;
+  --spacing-2xs: 0.125rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.5rem;
+  --spacing-2xl: 2rem;
+  --spacing-3xl: 3rem;
+  --spacing-4xl: 4rem;
+  /* Tailwind resolves max-w-* through --max-width, then --spacing, then
+     --container. Without these, max-w-3xl would be the 3rem spacing step;
+     pin the named sizes to container widths. */
+  --max-width-2xs: var(--container-2xs);
+  --max-width-xs: var(--container-xs);
+  --max-width-sm: var(--container-sm);
+  --max-width-md: var(--container-md);
+  --max-width-lg: var(--container-lg);
+  --max-width-xl: var(--container-xl);
+  --max-width-2xl: var(--container-2xl);
+  --max-width-3xl: var(--container-3xl);
+  --max-width-4xl: var(--container-4xl);
+  --radius-full: calc(infinity * 1px);
+}
+
+@plugin "daisyui" {
+  themes: light, dark;
+}
+
+@plugin "daisyui/theme" {
+  name: "latte";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: #eff1f5;
+  --color-base-200: #e6e9ef;
+  --color-base-300: #dce0e8;
+  --color-base-content: #4c4f69;
+  --color-primary: #f98284;
+  --color-primary-content: #2a2a2a;
+  --color-secondary: #b3e3da;
+  --color-secondary-content: #2a2a2a;
+  --color-accent: #ea76cb;
+  --color-accent-content: #2a2a2a;
+  --color-neutral: #4c4f69;
+  --color-neutral-content: #eff1f5;
+  --color-info: oklch(58% 0.158 241.966);
+  --color-info-content: oklch(97% 0.013 236.62);
+  --color-success: #40a02b;
+  --color-success-content: #2a2a2a;
+  --color-warning: #df8e1d;
+  --color-warning-content: #2a2a2a;
+  --color-error: #d20f39;
+  --color-error-content: oklch(96% 0.015 12.422);
+  --radius-button: 0.375rem;
+  --radius-selector: 0.375rem;
+  --radius-field: var(--radius-button);
+  --radius-box: var(--radius-button);
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 1;
+}
+
+@plugin "daisyui/theme" {
+  name: "mocha";
+  default: false;
+  prefersdark: true;
+  color-scheme: "dark";
+  --color-base-100: #1e1e2e;
+  --color-base-200: #181825;
+  --color-base-300: #11111b;
+  --color-base-content: #cdd6f4;
+  --color-primary: #f98284;
+  --color-primary-content: #2a2a2a;
+  --color-secondary: #94e2d5;
+  --color-secondary-content: #1e1e2e;
+  --color-accent: #f5c2e7;
+  --color-accent-content: #2a2a2a;
+  --color-neutral: #cdd6f4;
+  --color-neutral-content: #1e1e2e;
+  --color-info: #89b4fa;
+  --color-info-content: #1e1e2e;
+  --color-success: #a6e3a1;
+  --color-success-content: #1e1e2e;
+  --color-warning: #f9e2af;
+  --color-warning-content: #1e1e2e;
+  --color-error: #f38ba8;
+  --color-error-content: #1e1e2e;
+  --radius-button: 0.375rem;
+  --radius-selector: 0.375rem;
+  --radius-field: var(--radius-button);
+  --radius-box: var(--radius-button);
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 1;
+}
+
+@plugin "daisyui/theme" {
+  name: "field-guide";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: light-dark(#fdfdfb, #18272b);
+  --color-base-200: light-dark(#f6f6f2, #203237);
+  --color-base-300: light-dark(#e8e8e2, #34464a);
+  --color-base-content: light-dark(#292a22, #eee4ce);
+  --color-primary: light-dark(#536744, #9ba987);
+  --color-primary-content: light-dark(#f4eedc, #18272b);
+  --color-secondary: light-dark(#a76c37, #c29a69);
+  --color-secondary-content: light-dark(#fff8e8, #18272b);
+  --color-accent: light-dark(#9e5145, #bd8175);
+  --color-accent-content: light-dark(#fff8e8, #18272b);
+  --color-neutral: light-dark(#292a22, #eee4ce);
+  --color-neutral-content: light-dark(#f4eedc, #18272b);
+  --color-info: light-dark(#536744, #9ba987);
+  --color-info-content: light-dark(#f4eedc, #18272b);
+  --color-success: light-dark(#536744, #9ba987);
+  --color-success-content: light-dark(#f4eedc, #18272b);
+  --color-warning: light-dark(#a76c37, #c29a69);
+  --color-warning-content: light-dark(#292a22, #18272b);
+  --color-error: light-dark(#9e5145, #bd8175);
+  --color-error-content: light-dark(#fff8e8, #18272b);
+  --radius-button: 0.125rem;
+  --radius-selector: 0.125rem;
+  --radius-field: 0.125rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.125rem;
+  --size-field: 0.125rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "field-guide-night";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: light-dark(#fdfdfb, #18272b);
+  --color-base-200: light-dark(#f6f6f2, #203237);
+  --color-base-300: light-dark(#e8e8e2, #34464a);
+  --color-base-content: light-dark(#292a22, #eee4ce);
+  --color-primary: light-dark(#536744, #9ba987);
+  --color-primary-content: light-dark(#f4eedc, #18272b);
+  --color-secondary: light-dark(#a76c37, #c29a69);
+  --color-secondary-content: light-dark(#fff8e8, #18272b);
+  --color-accent: light-dark(#9e5145, #bd8175);
+  --color-accent-content: light-dark(#fff8e8, #18272b);
+  --color-neutral: light-dark(#292a22, #eee4ce);
+  --color-neutral-content: light-dark(#f4eedc, #18272b);
+  --color-info: light-dark(#536744, #9ba987);
+  --color-info-content: light-dark(#f4eedc, #18272b);
+  --color-success: light-dark(#536744, #9ba987);
+  --color-success-content: light-dark(#f4eedc, #18272b);
+  --color-warning: light-dark(#a76c37, #c29a69);
+  --color-warning-content: light-dark(#292a22, #18272b);
+  --color-error: light-dark(#9e5145, #bd8175);
+  --color-error-content: light-dark(#fff8e8, #18272b);
+  --radius-button: 0.125rem;
+  --radius-selector: 0.125rem;
+  --radius-field: 0.125rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.125rem;
+  --size-field: 0.125rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Embed themes: small, neutral chrome for a widget framed inside another
+   site. The host supplies `--embed-accent` (a hex colour) and its readable
+   `--embed-accent-content`; `embedThemeProperties` derives both. */
+@plugin "daisyui/theme" {
+  name: "embed";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: #ffffff;
+  --color-base-200: #f5f6f8;
+  --color-base-300: #e2e5ea;
+  --color-base-content: #1f2328;
+  --color-primary: var(--embed-accent, #2f5fd0);
+  --color-primary-content: var(--embed-accent-content, #ffffff);
+  --color-secondary: #e9ecf0;
+  --color-secondary-content: #1f2328;
+  --color-accent: var(--embed-accent, #2f5fd0);
+  --color-accent-content: var(--embed-accent-content, #ffffff);
+  --color-neutral: #1f2328;
+  --color-neutral-content: #ffffff;
+  --color-info: #2f5fd0;
+  --color-info-content: #ffffff;
+  --color-success: #1f7a3d;
+  --color-success-content: #ffffff;
+  --color-warning: #b35900;
+  --color-warning-content: #ffffff;
+  --color-error: #c62828;
+  --color-error-content: #ffffff;
+  --radius-button: 0.5rem;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "embed-dark";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: #1b1d21;
+  --color-base-200: #22252a;
+  --color-base-300: #34383f;
+  --color-base-content: #e8eaed;
+  --color-primary: var(--embed-accent, #7aa2f7);
+  --color-primary-content: var(--embed-accent-content, #000000);
+  --color-secondary: #2c3036;
+  --color-secondary-content: #e8eaed;
+  --color-accent: var(--embed-accent, #7aa2f7);
+  --color-accent-content: var(--embed-accent-content, #000000);
+  --color-neutral: #e8eaed;
+  --color-neutral-content: #1b1d21;
+  --color-info: #7aa2f7;
+  --color-info-content: #000000;
+  --color-success: #7fd49a;
+  --color-success-content: #000000;
+  --color-warning: #f0b464;
+  --color-warning-content: #000000;
+  --color-error: #f28b82;
+  --color-error-content: #000000;
+  --radius-button: 0.5rem;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "pirate-radio";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: #f3e6c9;
+  --color-base-200: #e9d9b9;
+  --color-base-300: #b5a88d;
+  --color-base-content: #191817;
+  --color-primary: #fa5a32;
+  --color-primary-content: #191817;
+  --color-secondary: #191817;
+  --color-secondary-content: #f3e6c9;
+  --color-accent: #e7b95c;
+  --color-accent-content: #191817;
+  --color-neutral: #191817;
+  --color-neutral-content: #f3e6c9;
+  --color-info: #427589;
+  --color-info-content: #f3e6c9;
+  --color-success: #4b6942;
+  --color-success-content: #f3e6c9;
+  --color-warning: #e7b95c;
+  --color-warning-content: #191817;
+  --color-error: #a82c25;
+  --color-error-content: #f3e6c9;
+  --radius-button: 0;
+  --radius-selector: 0;
+  --radius-field: 0;
+  --radius-box: 0;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "pirate-radio-night";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: #191817;
+  --color-base-200: #24221e;
+  --color-base-300: #716a5d;
+  --color-base-content: #f3e6c9;
+  --color-primary: #fa5a32;
+  --color-primary-content: #191817;
+  --color-secondary: #f3e6c9;
+  --color-secondary-content: #191817;
+  --color-accent: #e7b95c;
+  --color-accent-content: #191817;
+  --color-neutral: #f3e6c9;
+  --color-neutral-content: #191817;
+  --color-info: #8bbdc6;
+  --color-info-content: #191817;
+  --color-success: #adc495;
+  --color-success-content: #191817;
+  --color-warning: #e7b95c;
+  --color-warning-content: #191817;
+  --color-error: #ff8b73;
+  --color-error-content: #191817;
+  --radius-button: 0;
+  --radius-selector: 0;
+  --radius-field: 0;
+  --radius-box: 0;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "coin";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: #fff8e7;
+  --color-base-200: #f8ecce;
+  --color-base-300: #e9d6a6;
+  --color-base-content: #1f1a2e;
+  --color-primary: #ffc83d;
+  --color-primary-content: #1f1a2e;
+  --color-secondary: #5ab8ff;
+  --color-secondary-content: #1f1a2e;
+  --color-accent: #ff6f96;
+  --color-accent-content: #1f1a2e;
+  --color-neutral: #1f1a2e;
+  --color-neutral-content: #fff8e7;
+  --color-info: #1d6bd1;
+  --color-info-content: #fff8e7;
+  --color-success: #1f7a45;
+  --color-success-content: #fff8e7;
+  --color-warning: #ffb020;
+  --color-warning-content: #1f1a2e;
+  --color-error: #c8283f;
+  --color-error-content: #fff8e7;
+  --radius-button: 0.75rem;
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 2px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "coin-night";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: #1f1a2e;
+  --color-base-200: #292339;
+  --color-base-300: #4a4166;
+  --color-base-content: #fff8e7;
+  --color-primary: #ffc83d;
+  --color-primary-content: #1f1a2e;
+  --color-secondary: #7cc8ff;
+  --color-secondary-content: #1f1a2e;
+  --color-accent: #ff8aaa;
+  --color-accent-content: #1f1a2e;
+  --color-neutral: #fff8e7;
+  --color-neutral-content: #1f1a2e;
+  --color-info: #7cc8ff;
+  --color-info-content: #1f1a2e;
+  --color-success: #6fd69a;
+  --color-success-content: #1f1a2e;
+  --color-warning: #ffb020;
+  --color-warning-content: #1f1a2e;
+  --color-error: #ff7385;
+  --color-error-content: #1f1a2e;
+  --radius-button: 0.75rem;
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 2px;
+  --depth: 0;
+  --noise: 0;
+}
+
+:root,
+[data-theme]:not(
+  :where(
+    [data-theme="paper"],
+    [data-theme="vishnu"],
+    [data-theme="chamfer"],
+    [data-theme="ember"],
+    [data-theme="tide"],
+    [data-theme="tape"],
+    [data-theme="sunrise"]
+  )
+) {
+  --stipe-font-synthesis: initial;
+  font-synthesis: var(--stipe-font-synthesis, initial);
+  --font-numeric: var(--font-mono);
+  /* Complete palettes reset material; partial finishes inherit it. `initial` deliberately
+     selects the consuming component's geometry-aware fallback, not an ancestor. */
+  --stipe-surface-frame-width: initial;
+  --stipe-surface-frame-image: initial;
+  /* Near-flat housing: retain the palette, with at most a faint rim tint. */
+  --stipe-surface-molding-contrast: 1%;
+  --stipe-shadow-raised: initial;
+  --stipe-shadow-inset: initial;
+  --stipe-shadow-edge: initial;
+  --stipe-display-gasket-face: initial;
+  --stipe-display-texture-image: none;
+  --stipe-display-text-shadow: none;
+  --caps-button-border-width: initial;
+  --caps-button-weight: initial;
+  --caps-button-press: initial;
+  --caps-button-press-reduced: initial;
+  --caps-button-drop: initial;
+  --caps-button-drop-active: initial;
+  --caps-button-cut: initial;
+  --caps-button-border-color: initial;
+  --caps-button-disabled-opacity: initial;
+  --caps-button-disabled-face: initial;
+  --caps-button-disabled-ink: initial;
+  --caps-button-disabled-edge: initial;
+  --caps-button-disabled-drop: initial;
+  --caps-button-radius: initial;
+  --caps-button-padding: initial;
+  --caps-button-outline-face: initial;
+  --caps-button-outline-disabled-face: initial;
+  --caps-button-outline-ink: initial;
+  --caps-button-outline-hover-face: initial;
+  --caps-button-outline-hover-ink: initial;
+  --caps-button-outline-inset-content: initial;
+  --caps-button-outline-position: initial;
+  --caps-button-outline-isolation: initial;
+  --caps-button-outline-drop: initial;
+  --caps-heading-font: initial;
+  --caps-heading-weight: initial;
+  --caps-heading-case: initial;
+  --caps-heading-tracking: initial;
+  --caps-heading-line-height: initial;
+  --caps-label-font: initial;
+  --caps-card-image: initial;
+  --caps-card-interactive-edge: initial;
+  --caps-card-interactive-face: initial;
+  --caps-card-interactive-image: initial;
+  --caps-card-interactive-image-size: initial;
+  --caps-card-interactive-shadow: initial;
+  --caps-card-hover-edge: initial;
+  --caps-card-hover-animation: initial;
+  --caps-card-featured-edge: initial;
+  --caps-card-featured-width: initial;
+  --caps-card-featured-shadow: initial;
+  --caps-card-outline-edge: initial;
+  --caps-card-outline-width: initial;
+  --caps-card-outline-face: initial;
+  --caps-card-outline-image: initial;
+  --caps-card-outline-shadow: initial;
+  --caps-card-empty-edge: initial;
+  --caps-card-empty-width: initial;
+  --caps-card-empty-face: initial;
+  --caps-card-empty-shadow: initial;
+
+  --caps-window-image: initial;
+  --caps-window-face: initial;
+  --caps-window-border: initial;
+  --caps-window-border-active: initial;
+  --caps-window-shadow: initial;
+  --caps-window-header-face: initial;
+  --caps-window-header-tint: initial;
+  --caps-window-header-active-tint: initial;
+  --caps-window-header-border: initial;
+  --caps-window-title-font: initial;
+  --caps-window-title-size: initial;
+  --caps-window-title-weight: initial;
+  --caps-hud-border-width: initial;
+  --caps-hud-lift: initial;
+  --caps-hud-lift-large: initial;
+  --caps-hud-card-font: initial;
+  --caps-hud-card-top-border: initial;
+  --caps-hud-card-image: initial;
+  --caps-hud-title-font: initial;
+  --caps-hud-illustration-ink: initial;
+  --caps-print-texture-size: initial;
+  --caps-status-tray-chip-border-color: initial;
+  --caps-status-tray-chip-bg: initial;
+  --caps-status-tray-chip-bg-active: initial;
+  --caps-status-tray-chip-shadow: initial;
+  --caps-status-tray-count-bg: initial;
+  --caps-status-tray-readout-font: initial;
+  --caps-status-tray-readout-divider: initial;
+  --caps-status-tray-key-face: initial;
+  --caps-status-tray-key-tint: initial;
+  --caps-status-tray-title-case: initial;
+  --caps-status-tray-title-tracking: initial;
+  --caps-status-tray-note-tracking: initial;
+  --caps-keycap-face: initial;
+  --caps-keycap-ink: initial;
+  --caps-keycap-edge: initial;
+  --caps-keycap-tint: initial;
+  --card-paper: var(--color-base-100);
+  --card-back-paper: color-mix(in srgb, var(--card-paper) 94%, var(--card-ink));
+  --card-rule: var(--color-base-content);
+  --card-ink: var(--color-base-content);
+  --card-rule-width: 1px;
+  --card-frame: var(--color-neutral);
+  --card-window: var(--card-paper);
+  --card-window-ink: var(--card-ink);
+  --card-frame-ink: var(--color-neutral-content);
+  --card-accent: var(--color-secondary);
+  --card-shadow: color-mix(in srgb, var(--color-base-content) 28%, transparent);
+  --card-texture: none;
+  --newsprint-column-rule: var(--color-base-300);
+  --marginalia-ink: var(--stipe-fg-muted);
+  --growth-spore: var(--color-secondary);
+  --growth-mycelium: var(--color-primary);
+  --growth-fruiting: var(--color-accent);
+  --stipe-linework: var(--color-base-300);
+  --stipe-canvas: var(--color-base-100);
+  --stipe-surface: var(--color-base-200);
+  --stipe-surface-raised: var(--color-base-100);
+  --stipe-surface-selected: var(--color-base-300);
+  --stipe-fg-muted: inherit;
+  --stipe-hairline: color-mix(
+    in oklab,
+    var(--color-base-content) 22%,
+    transparent
+  );
+  --stipe-figure-ink: var(--color-base-content);
+  --stipe-density-compact: 0rem;
+  --stipe-density-comfortable: 0.25rem;
+  --stipe-motion-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --stipe-motion-squish: 90ms;
+  --stipe-motion-fast: 120ms;
+  --stipe-motion-normal: 180ms;
+  --stipe-motion-slow: 280ms;
+  --stipe-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --stipe-motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --stipe-motion-bounce: 0.3;
+  --stipe-motion-spring-duration: 320ms;
+  --stipe-motion-stretch: 0.28;
+  --stipe-motion-distance: 4px;
+  --stipe-motion-stagger: 24ms;
+  --stipe-motion-blur: 0px;
+  --stipe-motion-shake: 3px;
+  --stipe-motion-steps: 0;
+  --stipe-motion-fuse: 1px;
+  /* A press is a calm half-pixel settle: no squash, no spring. */
+  --stipe-press-depth: 0.5px;
+  --stipe-press-scale: 1;
+  --stipe-layer-desktop: 0;
+  --stipe-layer-windows: 10;
+  --stipe-layer-chrome: 20;
+  --stipe-layer-popover: 30;
+  --stipe-layer-dialog: 40;
+  --stipe-layer-toast: 50;
+  --stipe-layer-tooltip: 60;
+  --stipe-overlay-shadow-outset: 4px;
+  --stipe-icon-size-sm: 0.875rem;
+  --stipe-icon-size-md: 1rem;
+  --stipe-icon-size-lg: 1.25rem;
+  --stipe-icon-stroke: 1.75;
+  /* Trading card stock: a printed object, so it reads the same in every theme. */
+  --stipe-card-rim: #f4c32c;
+  --stipe-card-rim-edge: #c99a12;
+  --stipe-card-face: #fbf2df;
+  --stipe-card-panel: #f3e3c3;
+  --stipe-card-ink: #2d2416;
+  --stipe-card-ink-muted: #6d5a3c;
+  --stipe-card-accent: #e8554c;
+  --stipe-card-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.45), 0 18px 32px -20px rgb(0 0 0 / 0.55);
+  --stipe-card-foil-highlight: rgb(255 255 255 / 0.5);
+  --stipe-card-foil-warm: rgb(255 214 245 / 0.35);
+  --stipe-card-foil-cool: rgb(180 240 255 / 0.35);
+  --stipe-avatar-shadow: 0 2px 5px rgb(0 0 0 / 0.12);
+  /* Illustration palette: light/dark defaults, reset at each theme boundary.
+     Themes may retint these roles independently of control-state colours. */
+  --stipe-art-coral: light-dark(#ff6558, #ff6558);
+  --stipe-art-blue: light-dark(#43a6f2, #43a6f2);
+  --stipe-art-mint: light-dark(#63cfaa, #63cfaa);
+  --stipe-art-grape: light-dark(#a66cc1, #a66cc1);
+  --stipe-art-yellow: light-dark(#ffd05d, #ffd05d);
+  --stipe-art-cream: light-dark(#fff4de, #fff4de);
+  --stipe-art-ink: light-dark(#242c28, #242c28);
+  --stipe-art-inkcap: light-dark(#80499d, #80499d);
+  --stipe-art-graphite: light-dark(#49423f, #49423f);
+  /* Sketch ink: the line colour for drawings that sit on the page ground. */
+  --stipe-sketch-ink: var(--color-base-content);
+  --caps-pricing-band: initial;
+  --caps-pricing-band-ink: initial;
+  --caps-pricing-shadow: initial;
+  --caps-pricing-shadow-featured: initial;
+}
+
+/* Complete palettes start their typography and muted ink afresh. Values-only
+   finishes are deliberately absent: they inherit these from their parent. */
+:root,
+[data-theme="dark"],
+[data-theme="light"],
+[data-theme="latte"],
+[data-theme="mocha"],
+[data-theme="readout"],
+[data-theme="readout-night"],
+[data-theme="field-guide"],
+[data-theme="field-guide-night"],
+[data-theme="embed"],
+[data-theme="embed-dark"],
+[data-theme="phosphor"],
+[data-theme="codec"],
+[data-theme="consulting"],
+[data-theme="consulting-night"],
+[data-theme="consulting-riso-latte"],
+[data-theme="consulting-riso-glomzy"],
+[data-theme="consulting-ink"],
+[data-theme="consulting-night-ink"],
+[data-theme="consulting-riso-latte-ink"],
+[data-theme="consulting-riso-glomzy-ink"],
+[data-theme="pirate-radio"],
+[data-theme="pirate-radio-night"],
+[data-theme="coin"],
+[data-theme="coin-night"] {
+  --font-sans: "Nunito", system-ui, sans-serif;
+  --font-mono: "Maple Mono", ui-monospace, monospace;
+  --radius-button: var(--radius-selector);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-nameplate: "Grenze Gotisch", "Fraunces", Georgia, serif;
+  --font-handwritten: "Nothing You Could Do", cursive;
+  --stipe-fg-muted: color-mix(
+    in srgb,
+    var(--color-base-content) 62%,
+    transparent
+  );
+}
+
+/* Poster-print broadcast paper. Both palettes share the same material. */
+[data-theme="pirate-radio"],
+[data-theme="pirate-radio-night"] {
+  --stipe-font-synthesis: none;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "Departure Mono", ui-monospace, monospace;
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-nameplate: "Anton", "Arial Narrow", sans-serif;
+  --font-handwritten: "Nothing You Could Do", cursive;
+  --stipe-canvas: var(--color-base-100);
+  --stipe-surface: var(--color-base-200);
+  --stipe-surface-raised: var(--color-base-100);
+  --stipe-surface-selected: var(--color-base-300);
+  --stipe-surface-frame-width: 1px;
+  --stipe-surface-molding-contrast: 0%;
+  --stipe-display-text-shadow: none;
+  --caps-button-cut: 0px;
+  --caps-heading-font: var(--font-poster);
+  --caps-heading-weight: 400;
+  --caps-heading-case: uppercase;
+  --caps-heading-tracking: 0.02em;
+  --caps-heading-line-height: 1.2;
+  --caps-label-font: var(--font-mono);
+  --stipe-linework: var(--color-base-content);
+  --stipe-hairline: color-mix(
+    in oklab,
+    var(--color-base-content) 45%,
+    transparent
+  );
+  --stipe-fg-muted: color-mix(
+    in oklab,
+    var(--color-base-content) 78%,
+    var(--color-base-100)
+  );
+  --stipe-shadow-raised: 2px 2px 0 var(--color-base-content);
+  --stipe-shadow-inset: none;
+  --stipe-shadow-edge: none;
+  --stipe-surface-frame-image: linear-gradient(
+    var(--color-base-content),
+    var(--color-base-content)
+  );
+  --card-texture: radial-gradient(
+    ellipse at 20% 35%,
+    color-mix(in oklab, var(--color-base-content) 5%, transparent) 0.5px,
+    transparent 0.8px
+  );
+  --caps-print-texture-size: 7px 11px;
+  --caps-card-image: var(--card-texture);
+  --caps-window-image: var(--card-texture);
+  --stipe-display-texture-image: var(--card-texture);
+  --caps-button-border-width: 2px;
+  --caps-button-weight: 800;
+  --caps-button-drop: 2px 2px 0 var(--color-base-content);
+  --caps-button-drop-active: none;
+  --caps-button-press: 1px;
+  --stipe-motion-squish: 60ms;
+  --stipe-motion-fast: 90ms;
+  --stipe-motion-normal: 140ms;
+  --stipe-motion-slow: 200ms;
+  --stipe-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --stipe-motion-spring: cubic-bezier(0.2, 0, 0, 1);
+  /* StatusTray f72b58ed2 composes Popover, Display and KeycapButton. */
+  --caps-status-tray-chip-border-color: var(--stipe-linework);
+  --caps-status-tray-chip-bg: var(--color-base-100);
+  --caps-status-tray-chip-bg-active: var(--color-base-200);
+  --caps-status-tray-chip-shadow: none;
+  --caps-status-tray-count-bg: var(--color-base-200);
+  --caps-status-tray-readout-font: var(--font-mono);
+  --caps-status-tray-readout-divider: var(--stipe-linework);
+  --caps-status-tray-key-face: var(--color-base-100);
+  --caps-status-tray-key-tint: 18%;
+  --caps-status-tray-title-case: uppercase;
+  --caps-status-tray-title-tracking: 0.06em;
+  --caps-status-tray-note-tracking: 0.06em;
+  --caps-keycap-face: var(--color-base-100);
+  --caps-keycap-ink: var(--color-base-content);
+  --caps-keycap-edge: var(--stipe-linework);
+  --caps-keycap-tint: 18%;
+}
+
+:root:not([data-theme]),
+[data-theme="latte"] {
+  --stipe-fg-muted: #5c5f77;
+  --stipe-sketch-ink: #1c1b22;
+}
+
+[data-theme="mocha"] {
+  --stipe-fg-muted: #a6adc8;
+  --stipe-sketch-ink: #f1e6d2;
+}
+
+/* Quiet plastic (Levi, 2026-10-13): the everyday palettes keep their colour
+   and shapes but drop the molded gloss. Raised parts carry at most a faint
+   1px drop, nothing is recessed by an inner shadow or rim light, and a
+   Surface's moulded rim is a hairline. Status beads keep their own glow. */
+:root:not([data-theme]),
+[data-theme="latte"],
+[data-theme="mocha"],
+[data-theme="light"],
+[data-theme="dark"] {
+  --stipe-shadow-raised: 0 1px 2px
+    color-mix(in oklab, var(--color-base-content) 6%, transparent);
+  --stipe-shadow-inset: none;
+  --stipe-shadow-edge: none;
+  --stipe-display-gasket-face: var(--color-base-200);
+  --stipe-surface-frame-width: 1px;
+  --stipe-surface-frame-image: linear-gradient(
+    var(--stipe-linework),
+    var(--stipe-linework)
+  );
+}
+
+/* Daisy selects Mocha from system preference when the host has no theme attribute. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --stipe-fg-muted: #a6adc8;
+    --stipe-sketch-ink: #f1e6d2;
+  }
+}
+
+[data-theme="field-guide"],
+[data-theme="field-guide-night"] {
+  --font-sans: "Nunito", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --stipe-fg-muted: light-dark(#625b49, #c0b69f);
+  --stipe-linework: var(--color-base-content);
+}
+
+/* Embed text inherits the host's family when it passes one, else system-ui. */
+[data-theme="embed"],
+[data-theme="embed-dark"] {
+  --font-sans: var(--embed-font-family, system-ui, sans-serif);
+  --stipe-fg-muted: #59616b;
+}
+
+[data-theme="embed-dark"] {
+  --stipe-fg-muted: #a9b0b9;
+}
+
+/* Field-guide editorial material shared by day and night. */
+[data-theme="field-guide"],
+[data-theme="field-guide-night"] {
+  --card-paper: light-dark(#f6f6f2, #203237);
+  --card-back-paper: light-dark(#eeece4, #293b3f);
+  --card-rule: light-dark(#625b49, #c0b69f);
+  --card-ink: light-dark(#292a22, #eee4ce);
+  --card-rule-width: 1px;
+  --card-frame: light-dark(#34362d, #0f1b1e);
+  --card-window: light-dark(#f7f5ee, #ddd5c1);
+  --card-window-ink: light-dark(#292a22, #26261f);
+  --card-frame-ink: light-dark(#f1ead6, #eee4ce);
+  --card-accent: light-dark(#b0893f, #c9a766);
+  --card-shadow: light-dark(rgb(41 42 34 / 30%), rgb(0 0 0 / 55%));
+  --newsprint-column-rule: light-dark(#c8c2b3, #526367);
+  --marginalia-ink: light-dark(#625b49, #c0b69f);
+  --growth-spore: light-dark(#a76c37, #c29a69);
+  --growth-mycelium: light-dark(#536744, #9ba987);
+  --growth-fruiting: light-dark(#9e5145, #bd8175);
+}
+[data-theme="field-guide"] {
+  --card-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.16 0 0 0 0 0.13 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+[data-theme="field-guide-night"],
+[data-theme="tape"] {
+  --card-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.93 0 0 0 0 0.89 0 0 0 0 0.81 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* Optional material presets: values only, never descendant component rules.
+   Complete Daisy inputs make these independent of their enclosing theme. */
+[data-theme="phosphor"],
+[data-theme="codec"] {
+  color-scheme: dark;
+  --font-sans: "Nunito", system-ui, sans-serif;
+  --font-mono: "Maple Mono", ui-monospace, monospace;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+  --radius-selector: var(--radius-field);
+  --radius-box: var(--radius-field);
+  --radius-button: var(--radius-field);
+  --color-primary-content: var(--color-base-100);
+  --color-secondary: var(--color-primary);
+  --color-secondary-content: var(--color-base-100);
+  --color-accent: var(--color-primary);
+  --color-accent-content: var(--color-base-100);
+  --color-neutral: var(--color-primary);
+  --color-neutral-content: var(--color-base-100);
+  --color-info: var(--color-primary);
+  --color-info-content: var(--color-base-100);
+  --color-success: var(--color-primary);
+  --color-success-content: var(--color-base-100);
+  --color-warning: #edd391;
+  --color-warning-content: #171c15;
+  --color-error: #ffad9e;
+  --color-error-content: #171c15;
+  --stipe-surface-frame-image: linear-gradient(
+    var(--color-base-300),
+    var(--color-base-300)
+  );
+  --stipe-shadow-raised: none;
+  --stipe-shadow-inset: none;
+  --stipe-shadow-edge: none;
+}
+
+[data-theme="phosphor"] {
+  --color-base-100: #10190f;
+  --color-base-200: #182516;
+  --color-base-300: #415938;
+  --color-base-content: #bddaa0;
+  --color-primary: #b4f575;
+  --radius-field: 4px;
+  --stipe-surface-frame-width: 2px;
+  --stipe-display-text-shadow: 0 0 12px #b4f57522;
+  --stipe-display-texture-image: repeating-linear-gradient(
+    0deg,
+    transparent 0 3px,
+    #b4f57506 3px 4px
+  );
+}
+
+[data-theme="codec"] {
+  --color-base-100: #111d24;
+  --color-base-200: #1b2c35;
+  --color-base-300: #405865;
+  --color-base-content: #c3d5dc;
+  --color-primary: #8ce2d0;
+  --radius-field: 0px;
+  --stipe-surface-frame-width: 1px;
+}
+
+/* Consulting: jamstack.consulting as a hand-printed spec sheet. Bricolage
+   Grotesque sets headings (--font-display), Instrument Sans everything read
+   (--font-sans) and Departure Mono the pixel accent (labels, tags, numerals,
+   prices) through --font-mono; its 11px grid sets the type scale.
+
+   Colorways. `riso` (the default) is two spot inks on warm grained
+   paper: Federal Blue for text and art, fluorescent pink for calls to
+   action, tags and figures. `night` is cream and lamp-amber on deep ink
+   green. riso-latte and riso-glomzy soften riso's pink (below). A page
+   picks a colorway with its own data-theme name. Each colorway has an
+   explicit -ink theme for an inverted slab; nested themes are independent.
+
+   Contrast (WCAG 2.x): riso blue on paper 6.4:1, muted 5.1:1, navy on pink
+   5.0:1, deep pink figures 3.8:1 (large text only), paper on blue 6.4:1;
+   night cream on green 13.1:1, muted 7.8:1, green on amber 7.6:1, amber on
+   green 7.6:1. The --caps-print-* values feed Caps' two-ink print filter. */
+[data-theme="consulting"],
+[data-theme="consulting-night"],
+[data-theme="consulting-riso-latte"],
+[data-theme="consulting-riso-glomzy"],
+[data-theme="consulting-ink"],
+[data-theme="consulting-night-ink"],
+[data-theme="consulting-riso-latte-ink"],
+[data-theme="consulting-riso-glomzy-ink"] {
+  --consulting-fallback:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --consulting-blue: #3d5588;
+  --consulting-navy: #16224a;
+  --consulting-pink: #ff48b0;
+  --consulting-pink-ink: #e0218a;
+  --consulting-paper: #f4eee1;
+  --consulting-green: #12261e;
+  --consulting-cream: #f1e9d2;
+  --consulting-amber: #f2a33a;
+  --font-sans: "Instrument Sans", var(--consulting-fallback);
+  --font-display: "Bricolage Grotesque", var(--consulting-fallback);
+  --font-mono:
+    "Departure Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --text-xs: 11px;
+  --text-sm: 13.75px;
+  --text-base: 16.5px;
+  --text-lg: 19.25px;
+  --text-xl: 22px;
+  --text-2xl: 27.5px;
+  --text-3xl: 33px;
+  --text-4xl: 38.5px;
+  --caps-prose-leading: 1.55;
+  --radius-selector: 0;
+  --radius-field: 0;
+  --radius-box: 0;
+  --radius-button: 0;
+  --depth: 0;
+  --noise: 0;
+  --color-secondary: var(--color-base-content);
+  --color-secondary-content: var(--color-base-100);
+  --color-neutral: var(--color-base-content);
+  --color-neutral-content: var(--color-base-100);
+  --color-base-300: var(--color-base-content);
+  --stipe-linework: var(--color-base-content);
+  --stipe-hairline: color-mix(
+    in oklab,
+    var(--color-base-content) 18%,
+    transparent
+  );
+  --caps-button-linework: 0%;
+  --caps-print-ink: var(--color-base-content);
+  --caps-print-filter: url("#caps-print");
+  background-image: var(--consulting-grain);
+  font-synthesis: none;
+  --caps-pricing-band: var(--color-base-content);
+  --caps-pricing-band-ink: var(--color-base-100);
+  --caps-pricing-shadow: calc(var(--spacing-xs) * 1.5)
+    calc(var(--spacing-xs) * 1.5) 0
+    color-mix(in oklab, var(--color-base-content) 30%, transparent);
+  --caps-pricing-shadow-featured: calc(var(--spacing-xs) * 2)
+    calc(var(--spacing-xs) * 2) 0 var(--color-base-content);
+}
+
+[data-theme="consulting"],
+[data-theme="consulting-night"],
+[data-theme="consulting-riso-latte"],
+[data-theme="consulting-riso-glomzy"] {
+  color-scheme: light;
+  --color-base-100: var(--consulting-paper);
+  --color-base-200: #eae2d0;
+  --color-base-content: var(--consulting-blue);
+  --color-primary: var(--consulting-pink);
+  --color-primary-content: var(--consulting-navy);
+  --color-accent: var(--consulting-pink);
+  --color-accent-content: var(--consulting-navy);
+  --stipe-figure-ink: var(--consulting-pink-ink);
+  --stipe-fg-muted: color-mix(
+    in srgb,
+    var(--color-base-content) 90%,
+    var(--color-base-100)
+  );
+  --caps-print-offset: var(--consulting-pink);
+  --consulting-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.24 0 0 0 0 0.33 0 0 0 0 0.53 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+[data-theme="consulting-ink"],
+[data-theme="consulting-night-ink"],
+[data-theme="consulting-riso-latte-ink"],
+[data-theme="consulting-riso-glomzy-ink"] {
+  color-scheme: dark;
+  --color-base-100: var(--consulting-blue);
+  --color-base-200: #34497a;
+  --color-base-content: var(--consulting-paper);
+  --color-primary: var(--consulting-pink);
+  --color-primary-content: var(--consulting-navy);
+  --color-accent: var(--consulting-pink);
+  --color-accent-content: var(--consulting-navy);
+  --stipe-figure-ink: var(--color-base-content);
+  --stipe-fg-muted: color-mix(
+    in srgb,
+    var(--color-base-content) 86%,
+    var(--color-base-100)
+  );
+  --caps-print-offset: var(--consulting-pink);
+  --consulting-grain: none;
+}
+
+[data-theme="consulting-night"] {
+  color-scheme: dark;
+  --color-base-100: var(--consulting-green);
+  --color-base-200: #1b3329;
+  --color-base-content: var(--consulting-cream);
+  --color-primary: var(--consulting-amber);
+  --color-primary-content: var(--consulting-green);
+  --color-accent: var(--consulting-amber);
+  --color-accent-content: var(--consulting-green);
+  --stipe-figure-ink: var(--consulting-amber);
+  --stipe-fg-muted: color-mix(
+    in srgb,
+    var(--color-base-content) 78%,
+    var(--color-base-100)
+  );
+  --caps-print-offset: var(--consulting-amber);
+  --consulting-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.91 0 0 0 0 0.82 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+[data-theme="consulting-night-ink"] {
+  color-scheme: light;
+  --color-base-100: var(--consulting-cream);
+  --color-base-200: #e6dcc0;
+  --color-base-content: var(--consulting-green);
+  --color-primary: var(--consulting-amber);
+  --color-primary-content: var(--consulting-green);
+  --color-accent: var(--consulting-amber);
+  --color-accent-content: var(--consulting-green);
+  --stipe-figure-ink: var(--color-base-content);
+  --stipe-fg-muted: color-mix(
+    in srgb,
+    var(--color-base-content) 80%,
+    var(--color-base-100)
+  );
+  --caps-print-offset: var(--consulting-amber);
+  --consulting-grain: none;
+}
+
+/* riso-latte: riso's blue and paper with Catppuccin Latte pink as the fill
+   ink (navy on pink 5.8:1). Latte pink is too light for figures on paper
+   (2.3:1), so figures print in the blue. */
+[data-theme="consulting-riso-latte"],
+[data-theme="consulting-riso-latte-ink"] {
+  --consulting-pink: #ea76cb;
+  --consulting-pink-ink: var(--consulting-blue);
+}
+
+/* riso-glomzy: only Glomzy-07 (Lospec) colours. Plum ink #483355 on
+   #d9d3d9 paper (7.6:1), muted #524f73 (5.2:1). Buttons and figures take
+   the illustrations' mauve family: buttons #823e69 with #d9d3d9 text
+   (5.0:1), figures #823e69 (5.0:1), and dusty rose #b6607c for the
+   misregistered print and the decorative, aria-hidden diagram tags
+   (#2a202a on rose 3.7:1). The slab is #d9d3d9 on #483355 (7.6:1), muted
+   #b8b0b9 (5.3:1), its buttons #d9d3d9 with #823e69 text (5.0:1). */
+[data-theme="consulting-riso-glomzy"] {
+  color-scheme: light;
+  --color-base-100: #d9d3d9;
+  --color-base-200: #b8b0b9;
+  --color-base-content: #483355;
+  --color-primary: #823e69;
+  --color-primary-content: #d9d3d9;
+  --color-accent: #b6607c;
+  --color-accent-content: #2a202a;
+  --stipe-figure-ink: #823e69;
+  --stipe-fg-muted: #524f73;
+  --caps-print-offset: #b6607c;
+  --consulting-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.2 0 0 0 0 0.33 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+[data-theme="consulting-riso-glomzy-ink"] {
+  color-scheme: dark;
+  --color-base-100: #483355;
+  --color-base-200: #613661;
+  --color-base-content: #d9d3d9;
+  --color-primary: #d9d3d9;
+  --color-primary-content: #823e69;
+  --color-accent: #b6607c;
+  --color-accent-content: #2a202a;
+  --stipe-figure-ink: var(--color-base-content);
+  --stipe-fg-muted: #b8b0b9;
+  --caps-print-offset: #b6607c;
+  --consulting-grain: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  [data-theme] {
+    --stipe-motion-bounce: 0;
+    --stipe-motion-stretch: 0;
+    --stipe-motion-distance: 0px;
+    --stipe-motion-stagger: 0ms;
+    --stipe-motion-blur: 0px;
+    --stipe-motion-shake: 0px;
+    --stipe-motion-steps: 0;
+    --stipe-press-depth: 0px;
+    --stipe-press-scale: 1;
+    --stipe-motion-squish: 120ms;
+    --stipe-motion-fast: 120ms;
+    --stipe-motion-normal: 120ms;
+    --stipe-motion-slow: 120ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-property: opacity !important;
+    transition-duration: var(--stipe-motion-fast) !important;
+  }
+}
+
+/* Coin: the arcade cabinet. Cream (or night-purple) cabinet paper, gold
+   coin primary, ink outlines and a hard drop under every raised part, so a
+   press sinks the whole button into its slot. Nunito sets text, Bricolage
+   headings at black weight, Departure Mono the attract-mode labels.
+
+   Contrast (WCAG 2.x): ink on cream 15.9:1, muted about 6.5:1, ink on gold
+   10.9:1; night muted about 8.8:1. Every tone content pair is at least 4.9:1. */
+[data-theme="coin"],
+[data-theme="coin-night"] {
+  --stipe-font-synthesis: none;
+  --font-display: "Bricolage Grotesque", "Nunito", system-ui, sans-serif;
+  --font-mono: "Departure Mono", ui-monospace, monospace;
+  --stipe-fg-muted: color-mix(
+    in oklab,
+    var(--color-base-content) 72%,
+    var(--color-base-100)
+  );
+  --stipe-linework: var(--color-base-content);
+  --stipe-hairline: color-mix(
+    in oklab,
+    var(--color-base-content) 35%,
+    transparent
+  );
+  --stipe-surface-frame-width: 2px;
+  --stipe-surface-frame-image: linear-gradient(
+    var(--color-base-content),
+    var(--color-base-content)
+  );
+  --stipe-surface-molding-contrast: 0%;
+  --stipe-shadow-raised: 0 4px 0 var(--color-base-content);
+  --stipe-shadow-inset: none;
+  --stipe-shadow-edge: none;
+  --stipe-display-gasket-face: var(--color-base-200);
+  --caps-heading-font: var(--font-display);
+  --caps-heading-weight: 800;
+  --caps-heading-tracking: -0.01em;
+  --caps-label-font: var(--font-mono);
+  --caps-button-border-width: 3px;
+  --caps-button-border-color: var(--color-base-content);
+  --caps-button-radius: var(--radius-button);
+  --caps-button-weight: 900;
+  --caps-button-press: 6px;
+  --caps-button-press-reduced: 0 6px;
+  --caps-button-drop: 0 6px 0 var(--color-base-content);
+  --caps-button-drop-active: 0 0 0 var(--color-base-content);
+  --caps-button-outline-face: var(--color-base-100);
+  --caps-button-outline-ink: var(--color-base-content);
+  --caps-button-outline-hover-face: var(--color-base-200);
+  /* A disabled key is the cabinet's plate, flat in its slot: the same
+     base-200 face and faint edge latte and mocha give a disabled plate. */
+  --caps-button-disabled-opacity: 1;
+  --caps-button-disabled-face: var(--color-base-200);
+  --caps-button-disabled-ink: var(--stipe-fg-muted);
+  --caps-button-disabled-edge: color-mix(
+    in oklab,
+    var(--color-base-content) 30%,
+    var(--color-base-200)
+  );
+  --caps-button-disabled-drop: none;
+  --caps-card-outline-edge: var(--color-base-content);
+  --caps-keycap-face: var(--color-base-100);
+  --caps-keycap-ink: var(--color-base-content);
+  --caps-keycap-edge: var(--color-base-content);
+  --caps-keycap-tint: 18%;
+}
+
+/* Finish-only boundary: inherits the enclosing palette and typography. */
+[data-theme="chamfer"] {
+  --root-bg: transparent;
+  --caps-button-border-width: 0px;
+  --caps-button-radius: 0px;
+  --caps-button-padding: var(--spacing-xl);
+  --caps-button-cut: polygon(
+    0.625rem 0,
+    calc(100% - 0.625rem) 0,
+    100% 50%,
+    calc(100% - 0.625rem) 100%,
+    0.625rem 100%,
+    0 50%
+  );
+  --caps-button-outline-face: var(--color-base-content);
+  --caps-button-outline-disabled-face: var(--color-base-content);
+  --caps-button-outline-ink: var(--color-base-content);
+  --caps-button-outline-hover-ink: var(--color-base-100);
+  --caps-button-outline-inset-content: "";
+  --caps-button-outline-position: relative;
+  --caps-button-outline-isolation: isolate;
+  --caps-button-outline-drop: none;
+}
+
+/* Game paper is a finish: retain the enclosing palette and typography. */
+[data-theme="paper"] {
+  --root-bg: transparent;
+  --caps-pixel-outline-ink: var(--card-ink);
+  --size-field: 0.225rem;
+  --caps-button-border-width: 2px;
+  --caps-button-border-color: var(--card-ink);
+  --caps-button-weight: 700;
+  --caps-button-drop: 0 2px 0 var(--card-ink);
+  --caps-button-drop-active: none;
+  --caps-button-press: 2px;
+  --caps-window-face: var(--card-paper);
+  --caps-window-image: var(--card-texture, none);
+  --caps-window-border: 2px solid var(--card-ink);
+  --caps-window-border-active: var(--card-ink);
+  --caps-window-shadow: 3px 3px 0
+    color-mix(in oklab, var(--card-ink) 88%, transparent);
+  --caps-window-header-face: var(--card-paper);
+  --caps-window-header-tint: 16%;
+  --caps-window-header-active-tint: 18%;
+  --caps-window-header-border: 2px solid var(--card-ink);
+  --caps-window-title-font: var(--font-display);
+  --caps-window-title-size: 0.9375rem;
+  --caps-window-title-weight: 700;
+  --caps-hud-border-width: 2px;
+  --caps-hud-lift: 3px;
+  --caps-hud-lift-large: 6px;
+}
+/* Game tints retain the surrounding palette and follow its day/night scheme. */
+[data-theme="ember"] {
+  --root-bg: transparent;
+  --color-primary: light-dark(#a4462a, #e08455);
+  --color-primary-content: light-dark(#fff3e2, #1c1410);
+  --color-accent: light-dark(#b9762a, #d9a24e);
+  --color-accent-content: light-dark(#fff8e8, #1c1410);
+  --card-accent: light-dark(#c98a2c, #d9a24e);
+}
+[data-theme="tide"] {
+  --root-bg: transparent;
+  --color-primary: light-dark(#2f6273, #86b9c2);
+  --color-primary-content: light-dark(#eef6f4, #102226);
+  --color-accent: light-dark(#8a6a2f, #c9a766);
+  --color-accent-content: light-dark(#fff8e8, #18272b);
+  --card-accent: light-dark(#b0893f, #c9a766);
+}
+/* End-card materials compose with field-guide paper and an optional game tint. */
+[data-theme="tape"] {
+  color-scheme: dark;
+  --root-bg: transparent;
+  --caps-hud-card-font: monospace;
+  --caps-hud-title-font: monospace;
+  --caps-hud-card-top-border: 6px solid #c85b48;
+  --caps-hud-card-image: repeating-linear-gradient(
+    0deg,
+    transparent 0 3px,
+    #ffffff08 3px 4px
+  );
+  --caps-hud-illustration-ink: #c85b48;
+}
+[data-theme="sunrise"] {
+  --root-bg: transparent;
+  --caps-hud-card-top-border: 6px solid #d99b51;
+  --caps-hud-card-image: linear-gradient(180deg, #efb95e28, transparent 65%);
+  --caps-hud-illustration-ink: #d99b51;
+}
+
+/* Vishnu is a card finish; enclosing palettes keep their colors and typography. */
+[data-theme="vishnu"] {
+  --root-bg: transparent;
+  --caps-card-interactive-edge: color-mix(
+    in oklab,
+    var(--color-secondary) 48%,
+    var(--color-base-content) 15%
+  );
+  --caps-card-interactive-face: transparent;
+  --caps-card-interactive-image-size: auto;
+  --caps-card-interactive-image: linear-gradient(
+    150deg,
+    color-mix(in oklab, var(--color-base-100) 93%, var(--color-accent)),
+    var(--color-base-100) 48%,
+    color-mix(in oklab, var(--color-base-100) 91%, var(--color-primary))
+  );
+  --caps-card-interactive-shadow:
+    0 2px 0
+      color-mix(in oklab, var(--color-secondary) 35%, var(--color-base-300)),
+    0 10px 20px -14px var(--color-base-content);
+  --caps-card-hover-edge: var(--color-primary);
+  --caps-card-hover-animation: caps-card-wiggle
+    var(--stipe-motion-spring-duration) ease-in-out;
+  --caps-card-featured-edge: var(--color-base-content);
+  --caps-card-featured-width: 3px;
+  --caps-card-featured-shadow:
+    0 7px 0 var(--color-base-content),
+    0 22px 30px -18px var(--color-base-content);
+  --caps-card-outline-edge: var(--color-base-content);
+  --caps-card-outline-width: 3px;
+  --caps-card-outline-face: color-mix(
+    in oklab,
+    var(--color-base-100) 86%,
+    var(--color-secondary)
+  );
+  --caps-card-outline-image: none;
+  --caps-card-outline-shadow: var(--caps-card-interactive-shadow);
+  --caps-card-empty-edge: var(--color-base-content);
+  --caps-card-empty-width: 3px;
+  --caps-card-empty-face: color-mix(
+    in oklab,
+    var(--color-base-200) 85%,
+    var(--color-accent)
+  );
+  --caps-card-empty-shadow: 0 5px 0
+    color-mix(in oklab, var(--color-base-content) 25%, transparent);
+}
+
+/* Readout is a flat display material; component geometry stays with Caps. */
+[data-theme="readout"],
+[data-theme="readout-night"] {
+  color-scheme: light;
+  --color-base-100: light-dark(#fbfbfa, #0e0f11);
+  --color-base-200: light-dark(#f3f3f0, #15171a);
+  --color-base-300: light-dark(#e6e6e1, #26292e);
+  --color-base-content: light-dark(#1a1b1e, #e3e3df);
+  --color-primary: light-dark(#e5534b, #ff7b6b);
+  --color-primary-content: light-dark(#ffffff, #1a0d0b);
+  --color-secondary: var(--color-base-300);
+  --color-secondary-content: var(--color-base-content);
+  --color-accent: var(--color-primary);
+  --color-accent-content: var(--color-primary-content);
+  --color-neutral: var(--color-base-content);
+  --color-neutral-content: var(--color-base-100);
+  --color-info: light-dark(#2659c4, #8ab4f8);
+  --color-info-content: light-dark(#ffffff, #0e0f11);
+  --color-success: light-dark(#2f7a3e, #8fd19e);
+  --color-success-content: light-dark(#ffffff, #0e0f11);
+  --color-warning: light-dark(#9a6200, #e7c27a);
+  --color-warning-content: light-dark(#ffffff, #0e0f11);
+  --color-error: light-dark(#c4383a, #ff8a80);
+  --color-error-content: light-dark(#ffffff, #0e0f11);
+  --stipe-fg-muted: light-dark(#5c5f66, #9a9ea6);
+  --stipe-linework: light-dark(#e2e2dd, #25282c);
+  --stipe-hairline: light-dark(#edede9, #1c1f22);
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+  --radius-button: 0.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+  --stipe-surface-frame-width: 1px;
+  --stipe-surface-molding-contrast: 0%;
+  --stipe-shadow-raised: none;
+  --stipe-shadow-inset: none;
+  --stipe-shadow-edge: none;
+  --stipe-display-texture-image: none;
+  --stipe-display-text-shadow: none;
+  --caps-button-drop: none;
+  --caps-button-drop-active: none;
+  --caps-button-press: 0px;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "Maple Mono", ui-monospace, monospace;
+  --caps-label-font: var(--font-mono);
+  --stipe-screen-label-font: var(--font-mono);
+  --stipe-screen-label-size: 0.6875rem;
+  --stipe-screen-label-tracking: 0.06em;
+  --stipe-screen-label-line: var(--stipe-linework);
+  --card-paper: var(--color-base-100);
+  --card-rule: var(--stipe-linework);
+  --card-ink: var(--stipe-fg-muted);
+  --card-rule-width: 1px;
+  --growth-spore: var(--color-warning);
+  --growth-mycelium: var(--color-success);
+  --growth-fruiting: var(--color-error);
+  --stipe-motion-fast: 90ms;
+}
+
+[data-theme="readout-night"] {
+  color-scheme: dark;
+}
