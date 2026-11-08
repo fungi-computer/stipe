@@ -70,6 +70,8 @@ test("Stipe exposes every CSS token exactly once without duplicating Daisy roles
     "--stipe-linework": "var(--color-base-300)",
     "--stipe-hairline":
       "color-mix(in oklab, var(--color-base-content) 22%, transparent)",
+    "--stipe-hairline-quiet":
+      "color-mix(in oklab, var(--color-base-content) 10%, transparent)",
     "--stipe-figure-ink": "var(--color-base-content)",
     "--stipe-density-compact": "0rem",
     "--stipe-density-comfortable": "0.25rem",

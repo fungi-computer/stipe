@@ -551,6 +551,11 @@
     var(--color-base-content) 22%,
     transparent
   );
+  --stipe-hairline-quiet: color-mix(
+    in oklab,
+    var(--color-base-content) 10%,
+    transparent
+  );
   --stipe-figure-ink: var(--color-base-content);
   --stipe-density-compact: 0rem;
   --stipe-density-comfortable: 0.25rem;
@@ -687,6 +692,7 @@
     var(--color-base-content) 45%,
     transparent
   );
+  --stipe-hairline-quiet: var(--stipe-hairline);
   --stipe-fg-muted: color-mix(
     in oklab,
     var(--color-base-content) 78%,
@@ -956,6 +962,11 @@
     var(--color-base-content) 18%,
     transparent
   );
+  --stipe-hairline-quiet: color-mix(
+    in oklab,
+    var(--color-base-content) 10%,
+    transparent
+  );
   --caps-button-linework: 0%;
   --caps-print-ink: var(--color-base-content);
   --caps-print-filter: url("#caps-print");
@@ -1150,6 +1161,7 @@
     var(--color-base-content) 35%,
     transparent
   );
+  --stipe-hairline-quiet: var(--stipe-hairline);
   --stipe-surface-frame-width: 2px;
   --stipe-surface-frame-image: linear-gradient(
     var(--color-base-content),
@@ -1358,6 +1370,7 @@
   --stipe-fg-muted: light-dark(#5c5f66, #9a9ea6);
   --stipe-linework: light-dark(#e2e2dd, #25282c);
   --stipe-hairline: light-dark(#edede9, #1c1f22);
+  --stipe-hairline-quiet: var(--stipe-hairline);
   --radius-selector: 0.25rem;
   --radius-field: 0.25rem;
   --radius-box: 0.25rem;

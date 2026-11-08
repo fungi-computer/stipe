@@ -51,6 +51,7 @@ export const STIPE_TOKEN_NAMES = Object.freeze([
   "--stipe-fg-muted",
   "--stipe-linework",
   "--stipe-hairline",
+  "--stipe-hairline-quiet",
   "--stipe-figure-ink",
   "--stipe-density-compact",
   "--stipe-density-comfortable",
