@@ -1,5 +1,65 @@
 # Stipe (`@fungi.computer/stipe`)
 
+Stipe is the shared look of Fungi's interfaces: one stylesheet of Tailwind and
+daisyUI themes, spacing, fonts and material tokens.
+
+![Stipe's maintained themes compared in the Caps workbench: Latte, Mocha, Phosphor, Field guide and more](docs/media/readme-themes.png)
+
+## Quick start
+
+Install it:
+
+```sh
+npm install @fungi.computer/stipe
+```
+
+Import the stylesheet once, then set and watch the theme. This browser snippet
+shows the current theme in a status element and switches the page to `mocha`:
+
+```ts
+import { applyTheme, getTheme, subscribeTheme } from "@fungi.computer/stipe";
+import "@fungi.computer/stipe/styles.css";
+
+function watchThemeStatus(status: Element): () => void {
+  status.replaceChildren(getTheme() ?? "latte");
+  return subscribeTheme((theme) => status.replaceChildren(theme));
+}
+
+const status = document.querySelector("[data-theme-status]");
+if (status) {
+  const stopObserving = watchThemeStatus(status);
+  applyTheme("mocha");
+  // Call stopObserving() when you tear down this view.
+}
+```
+
+Without any `data-theme`, the page follows the reader's appearance setting with
+`latte` (light) or `mocha` (dark). Spacing utilities such as `p-lg` and `gap-sm`
+work right away.
+
+## Common tasks
+
+### Switch and watch the theme
+
+`applyTheme`, `getTheme` and `subscribeTheme` read and set `data-theme`. See the
+Quick start.
+
+### Pick or add a theme
+
+See [Themes](#themes).
+
+### Use the spacing scale and fonts
+
+See [Named spacing](#named-spacing) and [Fonts](#fonts).
+
+### Build components on it
+
+[Caps](../caps/README.md) is the React library built on Stipe.
+
+## Reference
+
+### Overview
+
 Stipe is a CSS-first theme layer for Tailwind CSS v4 and daisyUI 5. One
 stylesheet gives you a set of maintained daisyUI themes, a named spacing scale,
 self-hosted fonts, and a small vocabulary of material tokens for frames,
@@ -35,32 +95,6 @@ Entrypoints:
   only render Pierre trees.
 - `@fungi.computer/stipe/fonts.css`, `fonts-sans.css`, `fonts-mono.css` and
   `fonts-display.css`: self-hosted font faces.
-
-## Quick start
-
-Import the stylesheet once, then set and watch the theme. This browser snippet
-shows the current theme in a status element and switches the page to `mocha`:
-
-```ts
-import { applyTheme, getTheme, subscribeTheme } from "@fungi.computer/stipe";
-import "@fungi.computer/stipe/styles.css";
-
-function watchThemeStatus(status: Element): () => void {
-  status.replaceChildren(getTheme() ?? "latte");
-  return subscribeTheme((theme) => status.replaceChildren(theme));
-}
-
-const status = document.querySelector("[data-theme-status]");
-if (status) {
-  const stopObserving = watchThemeStatus(status);
-  applyTheme("mocha");
-  // Call stopObserving() when you tear down this view.
-}
-```
-
-Without any `data-theme`, the page follows the reader's appearance setting with
-`latte` (light) or `mocha` (dark). Spacing utilities such as `p-lg` and `gap-sm`
-work right away.
 
 ## Core concepts
 
